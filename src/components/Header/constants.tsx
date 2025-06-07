@@ -5,4 +5,5 @@ import { HeaderConfig } from "./types";
 export const HEADER_CONFIG: HeaderConfig = {
   "/": () => <Logo />,
   "/order-confirm": (navigate) => <PrevArrow onClick={() => navigate(-1)} style={{ cursor: "pointer" }} />,
+  "/payment-success": (navigate) => <PrevArrow onClick={() => navigate(-1)} style={{ cursor: "pointer" }} />,
 } as const;

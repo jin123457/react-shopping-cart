@@ -5,7 +5,6 @@ type HandleCheckChangeType = ({ action, id }: { action: "all" | "each"; id?: num
 
 export const useCartSelection = (cartItems: CartItemContent[]) => {
   const [checkedIds, setCheckedIds] = useState<Set<number>>(() => new Set(cartItems.map((item) => item.id)));
-
   const cartItemsWithCheck: CartItemWithCheck[] = cartItems.map((item) => ({
     ...item,
     isChecked: checkedIds.has(item.id),
