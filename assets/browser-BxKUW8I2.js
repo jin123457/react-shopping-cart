@@ -18765,14 +18765,14 @@ checkGlobals();
 const content = [
   {
     id: 1629,
-    quantity: 2,
+    quantity: 1,
     product: {
       id: 29,
-      name: "19×19×19 큐브",
-      price: 85e4,
-      imageUrl: "https://i.namu.wiki/i/kQCwKHpwjePBTPXPTIizJSE0alohKKRlsGOJSrPhAdsODckkF05KNDV27xdydVqHLEdgM7yQu6NSUL-gE0t9SZH_cmaY8tMquJnfLQv5shH_pSdvsRc87hCcO5V3WBZrTwR23NYzoJJEoQIHWqAM4Q.webp",
+      name: "수원삼성 30주년 레트로 유니폼",
+      price: 163e3,
+      imageUrl: "https://i.namu.wiki/i/tt29pghBdey0wco_4ZnHB4-iMuLnJGqo6bqm_piLdbs8XeWe4e6AnSbjKoSXzuVyvw9U-42zK1d_KFLxgdxv4A.webp",
       category: "패션잡화",
-      quantity: 10
+      quantity: 2
     }
   },
   {
@@ -18780,9 +18780,9 @@ const content = [
     quantity: 1,
     product: {
       id: 4,
-      name: "달 무드등",
-      price: 28e3,
-      imageUrl: "https://thumbnail6.coupangcdn.com/thumbnails/remote/492x492ex/image/vendor_inventory/794f/cecbea5bdc654a11ae02d28b4d1f4bd2a03a7389eb2b8cc4a45c1c9f7d9b.jpg",
+      name: "25년도 유니폼 어웨이",
+      price: 153e3,
+      imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRk3Se794LWmMDyG2Z6qkSjaGXqu7i59Gt-A&s",
       category: "패션잡화",
       quantity: 10
     }
@@ -18791,24 +18791,24 @@ const content = [
     id: 1124,
     quantity: 1,
     product: {
-      id: 23,
-      name: "리바이 아커만1111",
-      price: 6e7,
-      imageUrl: "https://image.zeta-ai.io/profile-image/793bf4d3-03de-4ac3-afe1-95be8a9bc62c/29cd5c72-f872-4dba-8be1-21ba51e4487f.jpeg?w=1080&q=90&f=webp",
+      id: 5,
+      name: "30주년 유니폼 홈",
+      price: 153e3,
+      imageUrl: "https://i.namu.wiki/i/tt29pghBdey0wco_4ZnHB4-iMuLnJGqo6bqm_piLdbs8XeWe4e6AnSbjKoSXzuVyvw9U-42zK1d_KFLxgdxv4A.webp",
       category: "패션잡화",
-      quantity: 0
+      quantity: 3
     }
   },
   {
     id: 154,
     quantity: 1,
     product: {
-      id: 24,
-      name: "부리부리 원형 테이블",
-      price: 321e4,
-      imageUrl: "https://cafe24.poxo.com/ec01/dmswo9075/HOvhRhvOk+Cp2KY4JuusAqBst4wtnsfbyXcejHyxMmXKvNELh5kEAFzUfK9ehG6ogDMwTwYJTLHHXeYVBq809g==/_/web/product/big/202408/19deee5e9d060d80a4180e2b2ecb6ce8.jpg",
-      category: "패션잡화",
-      quantity: 3
+      id: 6,
+      name: "수원삼성 와인",
+      price: 45e3,
+      imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStLWjM9ANPXZ5iWGLgvNsjBojvR4M--CaqmA&s",
+      category: "식료품",
+      quantity: 4
     }
   }
 ];
@@ -18837,7 +18837,7 @@ const sort = {
 const first = true;
 const numberOfElements = 5;
 const empty = false;
-const MOCKING_CART_ITEMS_DATA = {
+const MOCKING_CART_ITEMS_DATA$1 = {
   content,
   pageable,
   last,
@@ -18850,12 +18850,12 @@ const MOCKING_CART_ITEMS_DATA = {
   numberOfElements,
   empty
 };
-const BASE_URL = "https://techcourse-lv2-alb-974870821.ap-northeast-2.elb.amazonaws.com";
-const cartItems = { ...MOCKING_CART_ITEMS_DATA };
-const getCartItems = http.get(`${BASE_URL}/cart-items`, async () => {
+const BASE_URL$1 = "https://techcourse-lv2-alb-974870821.ap-northeast-2.elb.amazonaws.com";
+const cartItems = { ...MOCKING_CART_ITEMS_DATA$1 };
+const getCartItems = http.get(`${BASE_URL$1}/cart-items`, async () => {
   return HttpResponse.json(cartItems);
 });
-const patchCartItems = http.patch(`${BASE_URL}/cart-items/:id`, async ({ params, request }) => {
+const patchCartItems = http.patch(`${BASE_URL$1}/cart-items/:id`, async ({ params, request }) => {
   const cartItemId = Number(params.id);
   const { quantity } = await request.json();
   const currentCartItem = cartItems.content.find((cartItem) => cartItem.id === cartItemId);
@@ -18874,13 +18874,59 @@ const patchCartItems = http.patch(`${BASE_URL}/cart-items/:id`, async ({ params,
   }, []);
   return HttpResponse.json({ message: "Patch" }, { status: 200 });
 });
-const deleteCartItems = http.delete(`${BASE_URL}/cart-items/:id`, async ({ params }) => {
+const deleteCartItems = http.delete(`${BASE_URL$1}/cart-items/:id`, async ({ params }) => {
   const cartItemId = Number(params.id);
   cartItems.content = cartItems.content.filter((item) => item.id !== cartItemId);
   return HttpResponse.json({ message: "Delete" }, { status: 200 });
 });
 const cartItemHandler = [getCartItems, patchCartItems, deleteCartItems];
-const handlers = [...cartItemHandler];
+const MOCKING_CART_ITEMS_DATA = [
+  {
+    id: 1,
+    code: "FIXED5000",
+    description: "5,000원 할인 쿠폰",
+    expirationDate: "2025-11-30",
+    discount: 5e3,
+    minimumAmount: 1e5,
+    discountType: "fixed"
+  },
+  {
+    id: 2,
+    code: "BOGO",
+    description: "2개 구매 시 1개 무료 쿠폰",
+    expirationDate: "2025-06-30",
+    buyQuantity: 2,
+    getQuantity: 1,
+    discountType: "buyXgetY"
+  },
+  {
+    id: 3,
+    code: "FREESHIPPING",
+    description: "5만원 이상 구매 시 무료 배송 쿠폰",
+    expirationDate: "2025-08-31",
+    minimumAmount: 5e4,
+    discountType: "freeShipping"
+  },
+  {
+    id: 4,
+    code: "MIRACLESALE",
+    description: "미라클모닝 30% 할인 쿠폰",
+    expirationDate: "2025-07-31",
+    discount: 30,
+    availableTime: {
+      start: "04:00:00",
+      end: "07:00:00"
+    },
+    discountType: "percentage"
+  }
+];
+const BASE_URL = "https://techcourse-lv2-alb-974870821.ap-northeast-2.elb.amazonaws.com";
+const coupons = { ...MOCKING_CART_ITEMS_DATA };
+const getCoupons = http.get(`${BASE_URL}/coupons`, async () => {
+  return HttpResponse.json(coupons);
+});
+const couponsHandler = [getCoupons];
+const handlers = [...cartItemHandler, ...couponsHandler];
 const worker = setupWorker(...handlers);
 export {
   worker
