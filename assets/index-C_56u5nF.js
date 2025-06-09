@@ -15777,7 +15777,7 @@ function mergeRefs(...refs) {
 var isBrowser = typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined";
 try {
   if (isBrowser) {
-    window.__reactRouterVersion = "7.6.1";
+    window.__reactRouterVersion = "7.6.2";
   }
 } catch (e3) {
 }
@@ -19782,14 +19782,10 @@ function validateBasicCouponConditions(coupon, orderAmount) {
   const now2 = /* @__PURE__ */ new Date();
   const expirationDate = new Date(coupon.expirationDate);
   if (now2 > expirationDate) {
-    return { isValid: false, reason: "만료된 쿠폰입니다." };
+    return { isValid: false };
   }
   if (coupon.minimumAmount && orderAmount < coupon.minimumAmount) {
-    const needed = coupon.minimumAmount - orderAmount;
-    return {
-      isValid: false,
-      reason: `${needed.toLocaleString()}원 더 주문하면 사용할 수 있습니다.`
-    };
+    return { isValid: false };
   }
   if (coupon.availableTime) {
     const timeValidation = validateTimeCondition(coupon.availableTime);
@@ -19809,19 +19805,10 @@ function validateTimeCondition(availableTime) {
   const startMinutes = startH * 60 + startM;
   const endMinutes = endH * 60 + endM;
   if (nowMinutes < startMinutes) {
-    const waitMinutes = startMinutes - nowMinutes;
-    const waitHours = Math.floor(waitMinutes / 60);
-    const waitMins = waitMinutes % 60;
-    return {
-      isValid: false,
-      reason: `${waitHours > 0 ? `${waitHours}시간 ` : ""}${waitMins}분 후 사용 가능합니다.`
-    };
+    return { isValid: false };
   }
   if (nowMinutes > endMinutes) {
-    return {
-      isValid: false,
-      reason: "사용 가능한 시간이 지났습니다."
-    };
+    return { isValid: false };
   }
   return { isValid: true };
 }
@@ -19835,10 +19822,7 @@ function validateBogoCondition(orderItems) {
   );
   const hasEligibleProducts = Object.values(productQuantities).some((quantity) => quantity >= 2);
   if (!hasEligibleProducts) {
-    return {
-      isValid: false,
-      reason: "동일 상품을 2개 이상 구매해야 사용할 수 있습니다."
-    };
+    return { isValid: false };
   }
   return { isValid: true };
 }
@@ -19863,11 +19847,7 @@ function validateCouponUsage({
 }
 function validateShippingCoupon(orderAmount, isIsolatedAreaSelected) {
   if (!canApplyShippingCoupon(orderAmount, isIsolatedAreaSelected)) {
-    return {
-      isValid: false,
-      reason: "이미 무료 배송이 적용되어 있습니다.",
-      warningMessage: "제주도 선택 시 사용 가능합니다."
-    };
+    return { isValid: false };
   }
   return { isValid: true };
 }
@@ -19893,9 +19873,7 @@ const useCouponModal = ({
       return {
         coupon,
         isSelected,
-        isUsable: validation.isValid,
-        reason: validation.reason,
-        warningMessage: validation.warningMessage
+        isUsable: validation.isValid
       };
     });
   }, [coupons, orderItems, orderAmount, isIsolatedAreaSelected, selectedCouponIds]);
